@@ -291,3 +291,20 @@ GROUP BY c.id, c.nome, i.gold
 ORDER BY c.nome;
 
 SELECT '✅ Item system database update completed!' AS Status;
+
+
+
+CREATE TABLE IF NOT EXISTS character_skills (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    character_id INT NOT NULL,
+    skill_id INT NOT NULL,
+    current_level INT DEFAULT 1,
+    slot_number INT DEFAULT 0,
+    last_used_time BIGINT DEFAULT 0,
+    FOREIGN KEY (character_id) REFERENCES characters(id) ON DELETE CASCADE,
+    INDEX idx_character (character_id),
+    INDEX idx_skill (skill_id),
+    UNIQUE KEY unique_character_skill (character_id, skill_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+SELECT '✅ Character Skills table created!' AS Status;
